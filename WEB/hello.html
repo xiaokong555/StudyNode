@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./vue.js"></script>
+    <title>Hello</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{message1}}</p>
+        <p>{{message2.split('').reverse().join('')}}</p>
+
+        <hr>
+        <p>{{desc}}</p>
+        <p v-html="desc"></p>
+
+        <hr>
+        <a v-bind:href="link">哔哩哔哩</a>
+        <p :class="pc+'test'">赵日天</p>
+
+        <hr>
+        <p>{{ok?'Show':'Hidden'}}</p>
+        <p>{{user.name}}</p>
+
+        <hr>
+        <button v-on:click="showMe">点我试试</button>
+        <button @click="showMe">也点我试试</button>
+
+        <hr>
+        <p>{{count}}</p>
+        <button @click="addCount(1)">点我加1</button>
+
+        <hr>
+        <p v-if="showMe2">能看到我吗</p>
+        <p v-show="showMe3">我能被看到吗</p>
+
+        <hr>
+
+        <p v-if="gender === 1">男生</p>
+        <p v-else-if="gender === 2">女生</p>
+        <p v-else>其他</p>
+
+        <hr>
+        图片切换测试<br>
+        <button v-show="pIndex>0" @click="pIndex--">上一页</button>
+        <img :src="pList[pIndex]" style="max-width: 200px;">
+        <button v-show="pIndex<pList.length-1" @click="pIndex++">下一页</button>
+
+        <hr>
+        <div>
+            <p v-for="(num,index) in numList" ::key="num.id">{{num}} --- {{index}}</p>
+        </div>
+
+        <hr>
+        <div>
+            account：<input @keyup.enter="login" type="text" v-model="account"> <br><br>
+            password：<input type="password" v-model="password"> <br><br>
+            <button @click="login">login</button>
+            <button @click="reset">reset</button>
+            <!-- 
+                @keyup.enter
+                v-model.trim
+                v-model.number ---转型
+                @事件.stop     ---阻止冒泡
+                @事件.prevent  ---阻止传播
+            -->
+        </div>
+    </div>
+
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    message1: 'Hello World',
+                    message2: 'Hello World',
+                    desc: '<a href=" http://www.baidu.com">百度</a>',
+                    link: 'http://www.bilibili.com',
+                    pc: "zhaoritian",
+                    ok: false,
+                    user: {
+                        name: 'xiaokong'
+                    },
+                    count: 0,
+                    showMe2: false,
+                    showMe3: true,
+                    gender: 2,
+                    pIndex: 0,
+                    pList: [
+                        'https://w.wallhaven.cc/full/yx/wallhaven-yxqzpd.jpg',
+                        'https://w.wallhaven.cc/full/x6/wallhaven-x6pl9v.jpg',
+                        'https://w.wallhaven.cc/full/9m/wallhaven-9mjoy1.png'
+                    ],
+                    numList: [1, 2, 3, 4, 5],
+                    account: '',
+                    password: '',
+                }
+            },
+            methods: {
+                showMe() {
+                    alert("点我干嘛")
+                },
+                addCount(num) {
+                    this.count += num
+                    if (this.count > 20) {
+                        this.count = 0
+                    }
+
+                },
+                login() {
+                    alert("当前的账户密码为:" + this.account + '---' + this.password)
+                },
+                reset() {
+                    this.account = ''
+                    this.password = ''
+                }
+            },
+        })
+    </script>
+</body>
+
+
+
+</html>

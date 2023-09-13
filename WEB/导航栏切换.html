@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <style>
+        .active {
+            color: pink;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h3>导航栏高亮切换</h3>
+    <hr>
+    <div id="app">
+        <ul>
+            <li v-for="(item,index) in list" ::key="item.id">
+                <a :class="{active: index === aIndex}" href="#" @click.stop="aIndex = index">{{item.name}}</a>
+            </li>
+        </ul>
+    </div>
+
+    <hr>
+
+
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    list: [
+                        { id: 1, name: '标签1' },
+                        { id: 2, name: '标签2' },
+                        { id: 3, name: '标签3' }
+                    ],
+                    aIndex: 0
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
